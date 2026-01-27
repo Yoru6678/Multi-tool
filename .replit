@@ -1,6 +1,0 @@
-modules = ["python-3.12", "web", "php-8.2", "go-1.21"]
-[agent]
-expertMode = true
-
-[nix]
-channel = "stable-25_05"

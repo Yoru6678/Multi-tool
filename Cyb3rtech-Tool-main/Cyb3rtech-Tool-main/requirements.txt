@@ -1,0 +1,7 @@
+requests
+pywebcopy
+ipwhois
+whois
+python-whois
+phonenumbers
+dnspython

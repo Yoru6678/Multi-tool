@@ -1,0 +1,23 @@
+# Liste de proxies pour Multi-Tool Unifié
+# Format: protocol://ip:port ou protocol://user:pass@ip:port
+# Protocoles supportés: http, https, socks4, socks5
+#
+# Exemples:
+# http://123.45.67.89:8080
+# https://user:password@123.45.67.89:8080
+# socks5://123.45.67.89:1080
+#
+# IMPORTANT: Ajoutez vos propres proxies ci-dessous
+# Les proxies publics gratuits sont souvent instables
+# Pour de meilleurs résultats, utilisez des proxies privés/payants
+#
+# Sites pour trouver des proxies gratuits:
+# - https://www.proxy-list.download/
+# - https://free-proxy-list.net/
+# - https://www.sslproxies.org/
+# - https://spys.one/en/
+#
+# ============================================================================
+# VOS PROXIES ICI (un par ligne)
+# ============================================================================
+

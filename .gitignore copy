@@ -1,0 +1,162 @@
+# Multi-Tool Unifié - Fichiers à ignorer par Git
+
+# ============================================================================
+# Python
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ============================================================================
+# Environnements virtuels
+# ============================================================================
+venv/
+ENV/
+env/
+.venv
+bin/
+include/
+lib/
+pyvenv.cfg
+
+# ============================================================================
+# IDEs et Éditeurs
+# ============================================================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+
+# ============================================================================
+# Logs et Données Sensibles
+# ============================================================================
+logs/
+*.log
+*.log.*
+temp/
+tmp/
+*.tmp
+output/
+*.out
+results/
+
+# ============================================================================
+# Configuration et Secrets
+# ============================================================================
+config/config.ini
+config.ini
+config.local.ini
+.env
+.env.local
+.env.*.local
+*.env
+*.key
+*.pem
+*.crt
+secrets/
+credentials/
+
+# ============================================================================
+# Fichiers de Cache
+# ============================================================================
+.cache/
+*.cache
+pip-cache/
+.hypothesis/
+
+# ============================================================================
+# Fichiers Windows et macOS
+# ============================================================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ============================================================================
+# Fichiers de Backup et Temporaires
+# ============================================================================
+*.bak
+*.backup
+*.old
+*~
+.~*
+*.swp
+*.swo
+
+# ============================================================================
+# Fichiers de Test et Coverage
+# ============================================================================
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+
+# ============================================================================
+# Données Sensibles du Projet
+# ============================================================================
+# Tokens et webhooks (Ne JAMAIS commiter les vrais)
+tokens.txt
+webhooks.txt
+proxies.txt
+discord-tokens.txt
+discord-webhooks.txt
+real_tokens/
+test_tokens.txt
+test_webhooks.txt
+
+# Fichiers de données
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Archives et fichiers compressés
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+input/proxies_real.txt
+proxies_working.txt
+
+# Résultats de scans
+scan_results/
+reports/
+
+# Fichiers temporaires de l'outil
+*.session
+*.state

@@ -1,2 +1,0 @@
-🟢 Discord Token Storage 🟢      
--- (Tokens Must Be Below This Line) --

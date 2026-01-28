@@ -1,0 +1,95 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                      🎯 MULTI-TOOL UNIFIÉ SIGNATURE                          ║
+║                                                                              ║
+║                    ⭐ Intégration & Consolidation ⭐                          ║
+║                                                                              ║
+║                               by Gsx                                         ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  Projet:     Multi-Tool Unifié - Version Sécurisée                          ║
+║  Version:    1.0.0                                                           ║
+║  Date:       2026-01-28                                                      ║
+║  Plateforme: Windows 10/11                                                   ║
+║  Python:     3.8+                                                            ║
+║  Licence:    MIT                                                             ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  📦 Fusion de 6 Multi-Tools:                                                 ║
+║                                                                              ║
+║    ✓ 3TH1C4L-MultiTool                                                       ║
+║    ✓ Butcher-Tools                                                           ║
+║    ✓ Cyb3rtech-Tool                                                          ║
+║    ✓ Discord-All-Tools-In-One                                                ║
+║    ✓ Multi-tools                                                             ║
+║    ✓ fsociety                                                                ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  🔐 Mesures de Sécurité Implémentées:                                        ║
+║                                                                              ║
+║    ✓ Chiffrement AES-256 pour données sensibles                              ║
+║    ✓ Validation rigoureuse des entrées                                       ║
+║    ✓ Logs sécurisés sans exposition de secrets                               ║
+║    ✓ Gestion sécurisée des tokens                                            ║
+║    ✓ Protection contre les injections SQL/XSS                                ║
+║    ✓ Configuration isolée des données sensibles                              ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  🌟 Fonctionnalités Principales:                                             ║
+║                                                                              ║
+║    • Outils Réseau (scanner IP, ports, DNS, Traceroute)                      ║
+║    • OSINT Avancé (username tracker, email search, GeoIP)                     ║
+║    • Outils Sécurité (générateur password, chiffrement)                       ║
+║    • Outils Système (informations complètes)                                  ║
+║    • Outils Web (scanner vulnérabilités, SSL, HTTP headers)                   ║
+║    • Outils Discord (token checker, webhook tools)                            ║
+║    • Générateurs (passwords, Nitro codes, UUID, tokens)                       ║
+║    • Utilitaires (Base64, Hex, URL encoding, Hash)                            ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  🏗️  Architecture Modulaire:                                                 ║
+║                                                                              ║
+║    modules/          → 100+ fichiers de modules fonctionnels                  ║
+║    config/           → Gestion centralisée de la configuration                ║
+║    utils/            → Utilitaires et helpers réutilisables                   ║
+║    data/             → Stockage des données                                   ║
+║    logs/             → Fichiers de log sécurisés                              ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  🚀 Installation Rapide:                                                     ║
+║                                                                              ║
+║    1. python -m pip install -r requirements.txt                              ║
+║    2. python main.py                                                         ║
+║                                                                              ║
+║  📚 Documentation:                                                            ║
+║                                                                              ║
+║    • README.md         → Guide utilisateur complet                            ║
+║    • CREDITS.md        → Attribution et crédits                              ║
+║    • config.example.ini → Configuration exemple                              ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  ⚠️  AVERTISSEMENT LÉGAL:                                                     ║
+║                                                                              ║
+║  Cet outil est fourni à des fins ÉDUCATIVES et de RECHERCHE uniquement.      ║
+║  L'utilisateur est SEUL RESPONSABLE de son utilisation.                      ║
+║  Toute utilisation malveillante ou illégale est STRICTEMENT INTERDITE.       ║
+║                                                                              ║
+║  Les développeurs ne peuvent être tenus responsables de tout dommage         ║
+║  résultant de l'utilisation ou du mauvais usage de cet outil.                ║
+║                                                                              ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║                      Intégration & Consolidation                             ║
+║                                                                              ║
+║                              by Gsx ⭐                                       ║
+║                                                                              ║
+║                    Développé avec ❤️ pour la communauté                      ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝

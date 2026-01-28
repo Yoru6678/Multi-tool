@@ -1,0 +1,10 @@
+instahack/data/*.jpg
+instahack/data/*.md
+instagack/data/auth/*.md
+instahack/data/dump/*.md
+instahack/data/save/*.md
+data/*.md
+data/*.jpg
+data/auth/*.md
+data/dump/*.md
+data/save/*.md

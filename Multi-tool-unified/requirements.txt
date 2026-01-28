@@ -1,0 +1,114 @@
+# Multi-Tool Unifié - Dépendances Python
+# Compatible Windows 10/11, Python 3.8+
+# Dernière mise à jour: 2026-01-28
+
+# ============================================================================
+# SÉCURITÉ ET CHIFFREMENT
+# ============================================================================
+cryptography>=41.0.7          # Chiffrement moderne et sécurisé (pas de CVE connues)
+bcrypt>=4.1.2                 # Hashing sécurisé de mots de passe
+pyotp>=2.9.0                  # Authentification à deux facteurs (TOTP)
+
+# ============================================================================
+# INTERFACE UTILISATEUR
+# ============================================================================
+colorama>=0.4.6               # Couleurs dans le terminal Windows
+rich>=13.7.0                  # Interface riche pour le terminal
+questionary>=2.0.1            # Prompts interactifs élégants
+pyfiglet>=1.0.2               # ASCII art pour bannières
+
+# ============================================================================
+# RÉSEAU ET WEB
+# ============================================================================
+requests>=2.31.0              # Requêtes HTTP sécurisées
+urllib3>=2.1.0                # Client HTTP bas niveau
+aiohttp>=3.9.1                # Requêtes HTTP asynchrones
+dnspython>=2.4.2              # Résolution DNS
+python-whois>=0.8.0           # Informations WHOIS
+beautifulsoup4>=4.12.2        # Parsing HTML
+lxml>=5.0.0                   # Parser XML/HTML rapide
+
+# ============================================================================
+# VALIDATION ET PARSING
+# ============================================================================
+validators>=0.22.0            # Validation d'URLs, emails, IPs, etc.
+python-dotenv>=1.0.0          # Gestion des variables d'environnement
+pydantic>=2.5.3               # Validation de données
+
+# ============================================================================
+# UTILITAIRES SYSTÈME
+# ============================================================================
+psutil>=5.9.6                 # Informations système et processus
+pathlib>=1.0.1                # Manipulation de chemins (natif Python 3.8+)
+py-cpuinfo>=9.0.0             # Informations CPU détaillées
+
+# ============================================================================
+# LOGGING ET MONITORING
+# ============================================================================
+loguru>=0.7.2                 # Logging avancé et coloré
+
+# ============================================================================
+# FORMATS ET ENCODAGE
+# ============================================================================
+qrcode[pil]>=7.4.2            # Génération de QR codes
+Pillow>=10.1.0                # Manipulation d'images
+python-magic-bin>=0.4.14      # Détection de types de fichiers (Windows)
+
+# ============================================================================
+# DISCORD (optionnel - pour les outils Discord)
+# ============================================================================
+discord.py>=2.3.2             # API Discord (si nécessaire)
+discord-webhook>=1.3.0        # Webhooks Discord simplifiés
+
+# ============================================================================
+# OSINT ET RECHERCHE
+# ============================================================================
+phonenumbers>=8.13.26         # Validation et parsing de numéros de téléphone
+email-validator>=2.1.0        # Validation d'emails
+ipwhois>=1.2.0                # Informations WHOIS pour IPs
+
+# ============================================================================
+# GÉNÉRATION ET RANDOMISATION
+# ============================================================================
+faker>=22.0.0                 # Génération de données factices
+secrets                       # Génération sécurisée de tokens (natif Python 3.8+)
+
+# ============================================================================
+# CONFIGURATION
+# ============================================================================
+configparser                  # Parsing de fichiers INI (natif Python 3.8+)
+toml>=0.10.2                  # Support TOML
+
+# ============================================================================
+# TESTS ET QUALITÉ (développement)
+# ============================================================================
+# pytest>=7.4.3               # Framework de tests
+# pytest-cov>=4.1.0           # Couverture de code
+# black>=23.12.1              # Formatage de code
+# flake8>=7.0.0               # Linting
+# mypy>=1.8.0                 # Vérification de types
+
+# ============================================================================
+# NOTES DE SÉCURITÉ
+# ============================================================================
+# - Toutes les versions spécifiées sont les dernières versions stables
+# - Aucune CVE critique connue au moment de la création
+# - Utilisez 'pip install --upgrade' régulièrement pour les mises à jour
+# - Vérifiez https://pypi.org/project/<package>/security/ pour les alertes
+# - Utilisez 'pip-audit' pour scanner les vulnérabilités:
+#   pip install pip-audit && pip-audit
+
+# ============================================================================
+# INSTALLATION
+# ============================================================================
+# Installation standard:
+#   pip install -r requirements.txt
+#
+# Installation avec cache (plus rapide):
+#   pip install --cache-dir ./pip-cache -r requirements.txt
+#
+# Installation en mode utilisateur (sans admin):
+#   pip install --user -r requirements.txt
+#
+# Mise à jour de toutes les dépendances:
+#   pip install --upgrade -r requirements.txt

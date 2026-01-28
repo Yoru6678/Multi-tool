@@ -292,3 +292,46 @@ class OSINTAdvanced:
         except Exception as e:
             logger.error(f"Erreur search_domain: {str(e)}")
             return {"error": str(e)}
+
+    def check_pwned_email(self, email: str) -> Dict:
+        """
+        Vérifie si un email a été compromis via l'API HaveIBeenPwned
+        
+        Args:
+            email: Email à vérifier
+            
+        Returns:
+            Dict: Résultats de la recherche
+        """
+        import time
+        try:
+            # Validation de l'email
+            if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
+                return {"error": "Email invalide"}
+            
+            url = f"https://haveibeenpwned.com/api/v3/breachedaccount/{email}"
+            headers = {
+                "User-Agent": self.USER_AGENT
+            }
+
+            # Respect de la politique de rate limit de l'API HIBP
+            time.sleep(1.6)
+            
+            response = self.session.get(url, headers=headers, timeout=self.TIMEOUT)
+            
+            if response.status_code == 200:
+                logger.info(f"HIBP: {email} a été trouvé dans des fuites de données.")
+                return {"email": email, "breaches": response.json()}
+            elif response.status_code == 404:
+                logger.info(f"HIBP: {email} n'a été trouvé dans aucune fuite de données.")
+                return {"email": email, "breaches": []}
+            else:
+                logger.error(f"Erreur HIBP: {response.status_code} pour {email}")
+                return {"error": f"Erreur de l'API: {response.status_code}"}
+        
+        except requests.Timeout:
+            logger.warning(f"Timeout lors de la recherche HIBP pour {email}")
+            return {"error": "Timeout lors de la connexion à l'API HaveIBeenPwned"}
+        except Exception as e:
+            logger.error(f"Erreur inattendue dans check_pwned_email: {str(e)}")
+            return {"error": f"Erreur inattendue: {str(e)}"}

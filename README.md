@@ -542,14 +542,6 @@ Ce projet est une fusion et amélioration de plusieurs outils open-source :
 
 ---
 
-## 📞 Support et Contact
-
-- **Issues GitHub** : [Créer une issue](https://github.com/votre-repo/Multi-tool-unified/issues)
-- **Discussions** : [Forum de discussion](https://github.com/votre-repo/Multi-tool-unified/discussions)
-- **Email** : support@multitool-unified.com (si disponible)
-
----
-
 ## 🔄 Changelog
 
 ### Version 1.0.0 (2026-01-28)

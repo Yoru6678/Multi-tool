@@ -194,6 +194,7 @@ class MultiToolUnified:
 [04] Recherche d'adresse IP (GeoIP)
 [05] Recherche sur les réseaux sociaux
 [06] Recherche de domaine
+[07] Vérification de fuites de données (email)
 [00] Retour au menu principal
 """)
             
@@ -237,6 +238,24 @@ class MultiToolUnified:
                 if "error" not in results:
                     self.ui.print_success(f"Domaine: {domain}")
                     print(f"  IP: {results['dns'].get('ip')}")
+            elif choice == "07":
+                email = self.ui.get_input("Email à vérifier")
+                results = osint.check_pwned_email(email)
+                if "error" in results:
+                    self.ui.print_error(results["error"])
+                elif not results.get("breaches"):
+                    self.ui.print_success(f"Aucune fuite de données trouvée pour {email}")
+                else:
+                    self.ui.print_warning(f"Fuites de données trouvées pour {email}:")
+                    for breach in results["breaches"]:
+                        print(f"  - Nom: {breach.get('Name')}")
+                        print(f"    Titre: {breach.get('Title')}")
+                        print(f"    Domaine: {breach.get('Domain')}")
+                        print(f"    Date: {breach.get('BreachDate')}")
+                        # La description peut être longue, on la tronque
+                        description = breach.get('Description', '')
+                        print(f"    Description: {description[:100]}...")
+                        print()
             else:
                 self.ui.print_error("Choix invalide")
             
@@ -966,11 +985,12 @@ class MultiToolUnified:
         print(about_text)
         self.ui.pause()
     
-    def run(self):
+    def run(self, skip_legal=False):
         """Boucle principale du programme"""
         try:
             # Affichage de l'avertissement légal au démarrage
-            self.ui.show_legal_warning()
+            if not skip_legal:
+                self.ui.show_legal_warning()
             
             while self.running:
                 self.display_banner()
@@ -1020,13 +1040,48 @@ class MultiToolUnified:
 def main():
     """Point d'entrée principal"""
     try:
+        # Gestion des arguments de la ligne de commande
+        if '--version' in sys.argv:
+            print("Multi-Tool Unifié v1.0.0")
+            sys.exit(0)
+
+        if '--random-fact' in sys.argv:
+            from modules.ai_advanced import AIAdvanced
+            ai = AIAdvanced()
+            fact = ai.get_random_fact()
+            if fact:
+                # Use the UI class to print the fact
+                ui = UI()
+                ui.print_success("Fait aléatoire:")
+                print(fact)
+            else:
+                ui = UI()
+                ui.print_error("Impossible de récupérer un fait aléatoire.")
+            sys.exit(0)
+
+        if '--suggest-activity' in sys.argv:
+            from modules.ai_advanced import AIAdvanced
+            ai = AIAdvanced()
+            activity = ai.suggest_activity()
+            if activity:
+                # Use the UI class to print the activity
+                ui = UI()
+                ui.print_success("Suggestion d'activité:")
+                print(activity)
+            else:
+                ui = UI()
+                ui.print_error("Impossible de récupérer une suggestion d'activité.")
+            sys.exit(0)
+        
+        skip_legal = '--no-legal' in sys.argv
+
         # Configuration du titre de la console Windows
         if os.name == 'nt':
             os.system('title Multi-Tool Unifié v1.0.0')
         
         # Lancement du multi-tool
         app = MultiToolUnified()
-        app.run()
+        app.run(skip_legal=skip_legal)
     
     except Exception as e:
         print(f"[ERREUR FATALE] {str(e)}")

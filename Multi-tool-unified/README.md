@@ -325,6 +325,31 @@ Multi-tool-unified/
 
 ## ⚙️ Configuration
 
+### Système de Proxies
+
+Le multi-tool inclut un système de gestion de proxies pour éviter les blocages et rate limits :
+
+**Fichier de proxies:** `input/proxies.txt`
+
+**Formats supportés:**
+```
+http://123.45.67.89:8080
+https://user:password@123.45.67.89:8080
+socks5://123.45.67.89:1080
+```
+
+**Utilisation:**
+1. Ajoutez vos proxies dans `input/proxies.txt` (un par ligne)
+2. Le système sélectionne automatiquement un proxy aléatoire pour chaque requête
+3. Testez vos proxies avec l'option "Tester les proxies" dans le menu Configuration
+
+**Fonctionnalités:**
+- ✅ Rotation automatique des proxies
+- ✅ Test de fonctionnalité des proxies
+- ✅ Support HTTP, HTTPS, SOCKS4, SOCKS5
+- ✅ Support authentification (user:pass)
+- ✅ Suppression automatique des proxies non fonctionnels
+
 ### Fichier de Configuration
 
 Le fichier `config/config.ini` contient tous les paramètres :

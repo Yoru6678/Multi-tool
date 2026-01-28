@@ -106,6 +106,10 @@ htmlcov/
 test_tokens.txt
 test_webhooks.txt
 
+# Proxies réels (ne pas commiter)
+input/proxies_real.txt
+proxies_working.txt
+
 # Résultats de scans
 scan_results/
 reports/

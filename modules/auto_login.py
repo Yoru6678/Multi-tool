@@ -1,65 +1,69 @@
+# Coded / Dev: ††#9999 | https://github.com/TT-Tutorials | https://github.com/TT-Tutorials/GANG-Nuker
+# GANG Discord Nuker / Multi Tool©
+# Copyright © 2022
+########################################
+
+
 import requests
-import time
-from pystyle import Colors
-from selenium import webdriver
+from time import sleep
+from colorama import Fore, Back
+from selenium import webdriver, common
 
-def clear():
-    pass
+from utilities.Settings.common import getDriver, getheaders, SlowPrint
 
-def autologintitle():
-    pass
+def TokenLogin(token):
+    j = requests.get("https://discord.com/api/v9/users/@me", headers=getheaders(token)).json()
+    user = j["username"] + "#" + str(j["discriminator"])
+    script = """
+            document.body.appendChild(document.createElement `iframe`).contentWindow.localStorage.token = `"%s"`
+            location.reload();
+        """ % (token)
+    type_ = getDriver()
 
-def setTitle(title):
-    pass
+    if type_ == "chromedriver.exe":
+        opts = webdriver.ChromeOptions()
+        opts.add_experimental_option('excludeSwitches', ['enable-logging'])
+        opts.add_experimental_option("detach", True)
+        try:
+            driver = webdriver.Chrome(options=opts)
+        except common.exceptions.SessionNotCreatedException as e:
+            print(e.msg)
+            sleep(2)
+            SlowPrint("Press ENTER: ")
+            input()
+            spammer()
+    elif type_ == "operadriver.exe":
+        opts = webdriver.opera.options.ChromeOptions()
+        opts.add_experimental_option('excludeSwitches', ['enable-logging'])
+        opts.add_experimental_option("detach", True)
+        try:
+            driver = webdriver.Opera(options=opts)
+        except common.exceptions.SessionNotCreatedException as e:
+            print(e.msg)
+            sleep(2)
+            SlowPrint("Press ENTER: ")
+            input()
+            spammer()
+    elif type_ == "msedgedriver.exe":
+        opts = webdriver.EdgeOptions()
+        opts.add_experimental_option('excludeSwitches', ['enable-logging'])
+        opts.add_experimental_option("detach", True)
+        try:
+            driver = webdriver.Edge(options=opts)
+        except common.exceptions.SessionNotCreatedException as e:
+            print(e.msg)
+            sleep(2)
+            SlowPrint(f"[\x1b[95m>\x1b[95m\x1B[37m] Press ENTER: ")
+            input()
+            spammer()
+    else:
+        print(f'{Fore.RESET}[{Fore.RED}Error{Fore.RESET}] : Coudln\'t find a suitable driver to automatically login to {user}')
+        sleep(3)
+        print(f"{Fore.YELLOW}Paste this script into the console of a browser:{Fore.RESET}\n\n{Back.RED}{script}\n{Back.RESET}")
+        print("Press ENTER: ", end="")
+        input()
+        spammer()
 
-def main():
-    pass
-
-def autologin():
-    clear()
-    
-    entertoken = input(f"{Colors.red}Enter the token :")
-    
-    validityTest = requests.get('https://discordapp.com/api/v6/users/@me', headers={'Authorization': entertoken, 'Content-Type': 'application/json'})
-    if validityTest.status_code != 200:
-        print(f"{Colors.red}\nInvalid token")
-        input(f"{Colors.red}Press ENTER to exit")
-        main()
-    
-    try:
-        options = webdriver.ChromeOptions()
-        options.add_argument("--disable-blink-features=AutomationControlled")
-        driver = webdriver.Chrome(options=options)
-        driver.maximize_window()
-        driver.get('https://discord.com/login')
-        
-        js = ('function login(token) {'
-              'setInterval(() => {'
-              'document.body.appendChild(document.createElement `iframe`).contentWindow.localStorage.token = `"${token}"`}, 50);'
-              'setTimeout(() => {location.reload();}, 500);}')
-        
-        time.sleep(3)
-        driver.execute_script(js + f'login("{entertoken}")')
-        time.sleep(10)
-        
-        if driver.current_url == 'https://discord.com/login':
-            clear()
-            autologintitle()
-            print(f"{Colors.red}Connection Failed")
-            driver.close()
-        else:
-            clear()
-            autologintitle()
-            print(f"{Colors.green}Connection Established")
-        
-        input(f"{Colors.red}Press ENTER to exit")
-        main()
-    
-    except Exception as e:
-        print(f"{Colors.red}A problem occurred: {e}")
-        time.sleep(2)
-        clear()
-        main()
-
-if __name__ == "__main__":
-    autologin()
+    print(f"\n[\x1b[95m>\x1b[95m\x1B[37m] Logging Into: {user}")
+    driver.get("https://discordapp.com/login")
+    driver.execute_script(script)

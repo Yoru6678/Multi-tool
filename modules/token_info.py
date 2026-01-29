@@ -1,138 +1,161 @@
+# Coded / Dev: ††#9999 | https://github.com/TT-Tutorials | https://github.com/TT-Tutorials/GANG-Nuker
+# GANG Discord Nuker / Multi Tool©
+# Copyright © 2022
+########################################
+
+
 import requests
-from datetime import datetime, timezone
-from pystyle import Colors, Colorate
+from colorama import Fore
+from datetime import datetime
 
-def clear():
-    import os
-    os.system('cls' if os.name == 'nt' else 'clear')
+from utilities.Settings.common import getheaders
 
-def print_title(title):
-    print(f"{Colors.blue}{'=' * 60}\n{title}\n{'=' * 60}{Colors.reset}")
+def Info(token):
+    r = requests.get('https://discord.com/api/v9/users/@me', headers=getheaders(token))
+    cc_digits = {
+    'american express': '3',
+    'visa': '4',
+    'mastercard': '5'
+}
+    badges = ""
 
-def print_error(message):
-    print(f"{Colors.red}Error: {message}{Colors.reset}")
+    Discord_Employee = 1
+    Partnered_Server_Owner = 2
+    HypeSquad_Events = 4
+    Bug_Hunter_Level_1 = 8
+    House_Bravery = 64
+    House_Brilliance = 128
+    House_Balance = 256
+    Early_Supporter = 512
+    Bug_Hunter_Level_2 = 16384
+    Early_Verified_Bot_Developer = 131072
 
-def print_info(message):
-    print(f"{Colors.green}{message}{Colors.reset}")
+    flags = r.json()['flags']
+    if (flags == Discord_Employee):
+        badges += "Staff, "
+    if (flags == Partnered_Server_Owner):
+        badges += "Partner, "
+    if (flags == HypeSquad_Events):
+        badges += "Hypesquad Event, "
+    if (flags == Bug_Hunter_Level_1):
+        badges += "Green Bughunter, "
+    if (flags == House_Bravery):
+        badges += "Hypesquad Bravery, "
+    if (flags == House_Brilliance):
+        badges += "HypeSquad Brillance, "
+    if (flags == House_Balance):
+        badges += "HypeSquad Balance, "
+    if (flags == Early_Supporter):
+        badges += "Early Supporter, "
+    if (flags == Bug_Hunter_Level_2):
+        badges += "Gold BugHunter, "
+    if (flags == Early_Verified_Bot_Developer):
+        badges += "Verified Bot Developer, "
+    if (badges == ""):
+        badges = "None"
 
-def display_discord_info(token_discord):
-    try:
-        headers = {'Authorization': token_discord, 'Content-Type': 'application/json'}
+    userName = r.json()['username'] + '#' + r.json()['discriminator']
+    userID = r.json()['id']
+    phone = r.json()['phone']
+    email = r.json()['email']
+    language = r.json()['locale']
+    mfa = r.json()['mfa_enabled']
+    avatar_id = r.json()['avatar']
+    has_nitro = False
+    res = requests.get('https://discordapp.com/api/v9/users/@me/billing/subscriptions', headers=getheaders(token))
+    nitro_data = res.json()
+    has_nitro = bool(len(nitro_data) > 0)
+    avatar_url = f'https://cdn.discordapp.com/avatars/{userID}/{avatar_id}.webp'
+    creation_date = datetime.utcfromtimestamp(((int(userID) >> 22) + 1420070400000) / 1000).strftime('%d-%m-%Y %H:%M:%S UTC')
+
+    if has_nitro:
+        d1 = datetime.strptime(nitro_data[0]["current_period_end"].split('.')[0], "%Y-%m-%dT%H:%M:%S")
+        d2 = datetime.strptime(nitro_data[0]["current_period_start"].split('.')[0], "%Y-%m-%dT%H:%M:%S")
+        days_left = abs((d2 - d1).days)
+
+    billing_info = []
+    for x in requests.get('https://discordapp.com/api/v9/users/@me/billing/payment-sources', headers=getheaders(token)).json():
+        y = x['billing_address']
+        name = y['name']
+        address_1 = y['line_1']
+        address_2 = y['line_2']
+        city = y['city']
+        postal_code = y['postal_code']
+        state = y['state']
+        country = y['country']
+        if x['type'] == 1:
+            cc_brand = x['brand']
+            cc_first = cc_digits.get(cc_brand)
+            cc_last = x['last_4']
+            cc_month = str(x['expires_month'])
+            cc_year = str(x['expires_year'])
+            data = {
+                'Payment Type': 'Credit Card',
+                'Valid': not x['invalid'],
+                'CC Holder Name': name,
+                'CC Brand': cc_brand.title(),
+                'CC Number': ''.join(z if (i + 1) % 2 else z + ' ' for i, z in enumerate((cc_first if cc_first else '*') + ('*' * 11) + cc_last)),
+                'CC Exp. Date': ('0' + cc_month if len(cc_month) < 2 else cc_month) + '/' + cc_year[2:4],
+                'Address 1': address_1,
+                'Address 2': address_2 if address_2 else '',
+                'City': city,
+                'Postal Code': postal_code,
+                'State': state if state else '',
+                'Country': country,
+                'Default Payment': x['default']
+            }
+        elif x['type'] == 2:
+            data = {
+                'Payment Type': 'PayPal',
+                'Valid': not x['invalid'],
+                'PayPal Name': name,
+                'PayPal Email': x['email'],
+                'Address 1': address_1,
+                'Address 2': address_2 if address_2 else '',
+                'City': city,
+                'Postal Code': postal_code,
+                'State': state if state else '',
+                'Country': country,
+                'Default Payment': x['default']
+            }
+        billing_info.append(data)
         
-        user = requests.get('https://discord.com/api/v8/users/@me', headers=headers).json()
-        r = requests.get('https://discord.com/api/v8/users/@me', headers=headers)
-        
-        status = "Valid" if r.status_code == 200 else "Invalid"
+    print(f'''
+{Fore.RESET}{Fore.GREEN}####### Account Info #######{Fore.RESET}
+[{Fore.LIGHTMAGENTA_EX}Username{Fore.RESET}]        {userName} | {userID}
+[{Fore.LIGHTMAGENTA_EX}Badges{Fore.RESET}]          {badges}
+[{Fore.LIGHTMAGENTA_EX}Language{Fore.RESET}]        {language}
+[{Fore.LIGHTMAGENTA_EX}Created at{Fore.RESET}]      {creation_date}
+[{Fore.LIGHTMAGENTA_EX}Avatar URL{Fore.RESET}]      {avatar_url if avatar_id else ""}
+[{Fore.LIGHTMAGENTA_EX}Account Token{Fore.RESET}]   {Fore.RED}{token}{Fore.RESET}
 
-        username_discord = user.get('username', "None") + '#' + user.get('discriminator', "None")
-        display_name_discord = user.get('global_name', "None")
-        user_id_discord = user.get('id', "None")
-        email_discord = user.get('email', "None")
-        email_verified_discord = "Yes" if user.get('verified') else "No"
-        phone_discord = user.get('phone', "None")
-        mfa_discord = "Yes" if user.get('mfa_enabled') else "No"
-        country_discord = user.get('locale', "None")
+{Fore.RESET}{Fore.GREEN}####### Security Info #######{Fore.RESET}
+[{Fore.LIGHTMAGENTA_EX}Email{Fore.RESET}]           {email}
+[{Fore.LIGHTMAGENTA_EX}Phone Number{Fore.RESET}]    {phone if phone else ""}
+[{Fore.LIGHTMAGENTA_EX}2 Factor{Fore.RESET}]        {mfa}
 
-        created_at_discord = "None"
-        if 'id' in user:
-            created_at_discord = datetime.fromtimestamp(((int(user['id']) >> 22) + 1420070400000) / 1000, timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
-
-        nitro_discord = {0: 'False', 1: 'Nitro Classic', 2: 'Nitro Boosts', 3: 'Nitro Basic'}.get(user.get('premium_type'), 'None')
-
-        avatar_url_discord = f"https://cdn.discordapp.com/avatars/{user_id_discord}/{user.get('avatar')}.png"
-        if requests.get(avatar_url_discord).status_code != 200:
-            avatar_url_discord = "None"
-
-        avatar_discord = user.get('avatar', "None")
-        avatar_decoration_discord = str(user.get('avatar_decoration_data', "None"))
-        public_flags_discord = str(user.get('public_flags', "None"))
-        flags_discord = str(user.get('flags', "None"))
-        banner_discord = user.get('banner', "None")
-        banner_color_discord = user.get('banner_color', "None")
-        accent_color_discord = user.get("accent_color", "None")
-        nsfw_discord = "Yes" if user.get('nsfw_allowed') else "No"
-        linked_users_discord = ' / '.join([str(linked_user) for linked_user in user.get('linked_users', [])]) or "None"
-        bio_discord = "\n" + user.get('bio', "None")
-
-        authenticator_types_discord = ' / '.join([str(authenticator_type) for authenticator_type in user.get('authenticator_types', [])]) or "None"
-
-        guilds_response = requests.get('https://discord.com/api/v9/users/@me/guilds?with_counts=true', headers=headers)
-        guild_count = "None"
-        owner_guild_count = "None"
-        owner_guilds_names = "None"
-
-        if guilds_response.status_code == 200:
-            guilds = guilds_response.json()
-            guild_count = len(guilds)
-            owner_guilds = [guild for guild in guilds if guild['owner']]
-            owner_guild_count = f"({len(owner_guilds)})"
-            owner_guilds_names = "\n" + "\n".join([f"{guild['name']} ({guild['id']})" for guild in owner_guilds])
-
-        billing_discord = requests.get('https://discord.com/api/v6/users/@me/billing/payment-sources', headers=headers).json()
-        payment_methods_discord = ' / '.join(['CB' if method['type'] == 1 else 'Paypal' if method['type'] == 2 else 'Other' for method in billing_discord]) or "None"
-
-        friends_response = requests.get('https://discord.com/api/v8/users/@me/relationships', headers=headers)
-        friends_discord = "None"
-
-        if friends_response.status_code == 200:
-            friends = friends_response.json()
-            friends_list = [f"{friend['user']['username']}#{friend['user']['discriminator']} ({friend['user']['id']})" for friend in friends if friend['type'] not in [64, 128, 256, 1048704]]
-            friends_discord = ' / '.join(friends_list) or "None"
-
-            with open('friends_list.txt', 'w', encoding='utf-8') as file:
-                for friend in friends_list:
-                    file.write(friend + '\n')
-
-        gift_codes_response = requests.get('https://discord.com/api/v9/users/@me/outbound-promotions/codes', headers=headers)
-        gift_codes_discord = "None"
-
-        if gift_codes_response.status_code == 200:
-            gift_codes = gift_codes_response.json()
-            codes = [f"Gift: {gift_code['promotion']['outbound_title']}\nCode: {gift_code['code']}" for gift_code in gift_codes]
-            gift_codes_discord = '\n\n'.join(codes) if codes else "None"
-
-        print(f"""{Colors.blue}
-Status : {status}
-Token : {token_discord}
-Username : {username_discord}
-Display Name : {display_name_discord}
-Id : {user_id_discord}
-Created : {created_at_discord}
-Country : {country_discord}
-Email : {email_discord}
-Verified : {email_verified_discord}
-Phone : {phone_discord}
-Nitro : {nitro_discord}
-Linked Users : {linked_users_discord}
-Avatar Decor : {avatar_decoration_discord}
-Avatar : {avatar_discord}
-Avatar URL : {avatar_url_discord}
-Accent Color : {accent_color_discord}
-Banner : {banner_discord}
-Banner Color : {banner_color_discord}
-Flags : {flags_discord}
-Public Flags : {public_flags_discord}
-NSFW : {nsfw_discord}
-Multi-Factor Authentication : {mfa_discord}
-Authenticator Type  : {authenticator_types_discord}
-Billing : {payment_methods_discord}
-Gift Code : {gift_codes_discord}
-Guilds : {guild_count}
-Owner Guilds : {owner_guild_count} {owner_guilds_names}
-Bio : {bio_discord}{Colors.reset}
-        """)
-
-        input(f"{Colors.yellow}Press Enter to return to the main menu...{Colors.reset}")
-
-    except Exception as e:
-        print_error(f"Error when retrieving information: {e}")
-
-if __name__ == "__main__":
-    clear()
-    try:
-        print_title("Discord Info Fetcher")
-        token_discord = input(f"{Colors.yellow}Enter Discord token: {Colors.reset}")
-        display_discord_info(token_discord)
-        clear()
-    except Exception as e:
-        print_error(e)
+{Fore.RESET}{Fore.GREEN}####### Nitro Info #######{Fore.RESET}
+[{Fore.LIGHTMAGENTA_EX}Nitro Status{Fore.RESET}]    {has_nitro}
+[{Fore.LIGHTMAGENTA_EX}Expires in{Fore.RESET}]      {days_left if has_nitro else "0"} day(s)
+            ''')
+    if len(billing_info) > 0:
+        print(f"{Fore.RESET}{Fore.GREEN}####### Billing Info #######{Fore.RESET}")
+        if len(billing_info) == 1:
+            for x in billing_info:
+                for key, val in x.items():
+                    if not val:
+                        continue
+                    print(f"[{Fore.RED}"+'{:<23}{:<10}{}'.format(key+Fore.RED+Fore.RESET+"]", Fore.RESET, val))
+        else:
+            for i, x in enumerate(billing_info):
+                title = f'Payment Method #{i + 1} ({x["Payment Type"]})'
+                print('' + title)
+                print('' + ('=' * len(title)))
+                for j, (key, val) in enumerate(x.items()):
+                    if not val or j == 0:
+                        continue
+                    print(f"[{Fore.RED}"+'{:<23}{:<10}{}'.format(key+Fore.RED+Fore.RESET+"]", Fore.RESET, val))
+                if i < len(billing_info) - 1:
+                    print(f'{Fore.RESET}')
+        print(f'{Fore.RESET}')
+    input(f'[\x1b[95m>\x1b[95m\x1B[37m] Press ENTER: ')

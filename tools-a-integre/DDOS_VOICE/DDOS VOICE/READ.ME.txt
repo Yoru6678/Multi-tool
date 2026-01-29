@@ -1,0 +1,11 @@
+
+📁 » Setting up DDOS Voice Channel
+
+
+1. Install [Nodejs] (https://nodejs.org/)
+
+2. Open up [config.js] with notepad or some other editor, and place your token.
+
+3. Double Click on [start.bat]
+
+4. ENJOY
